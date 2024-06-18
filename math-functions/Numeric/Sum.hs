@@ -33,7 +33,8 @@ module Numeric.Sum
 import Control.DeepSeq (NFData(..))
 import Control.Monad
 import Data.Data (Typeable, Data)
-import Data.Vector.Generic (Vector(..), foldl')
+import Data.Vector.Generic (Vector(..))
+import qualified Data.Vector.Generic as V
 import qualified Data.Vector.Generic.Mutable as M
 
 import qualified Data.Foldable as F
@@ -136,7 +137,7 @@ kbn (KBNSum sum c) = sum + c
 -- | /O(n)/ Sum a vector of values.
 sumVector :: (Vector v Double, Summation s) =>
              (s -> Double) -> v Double -> Double
-sumVector f = f . foldl' add zero
+sumVector f = f . V.foldl' add zero
 {-# INLINE sumVector #-}
 
 -- $usage
